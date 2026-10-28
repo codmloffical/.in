@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn how thoughtful design creates meaningful digital experiences.">
+  <title>Read 4 | Designing for People — CODMIL</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --background: #030303;
+      --card: #0c0f14;
+      --border: #25282e;
+      --white: #ffffff;
+      --muted: #9aa9c5;
+      --cyan: #00d5ff;
+      --blue: #0066ff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--background);
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 48px, 1000px);
+      margin: auto;
+    }
+
+    /* Navigation */
+
+    header {
+      border-bottom: 1px solid #181818;
+    }
+
+    nav {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--cyan);
+    }
+
+    .back-link {
+      color: var(--muted);
+      font-size: 12px;
+      transition: color 0.25s;
+    }
+
+    .back-link:hover {
+      color: var(--cyan);
+    }
+
+    /* Article hero */
+
+    .article-hero {
+      padding: 100px 0 65px;
+      border-bottom: 1px solid #181818;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 25px;
+    }
+
+    .article-number {
+      color: #626c80;
+      font-family: monospace;
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      max-width: 850px;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.04;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      color: var(--cyan);
+    }
+
+    .hero-description {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+      color: #768198;
+      font-size: 11px;
+    }
+
+    .article-meta span::before {
+      content: "•";
+      color: var(--cyan);
+      margin-right: 8px;
+    }
+
+    /* Article content */
+
+    .article-layout {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 65px;
+      padding: 75px 0;
+    }
+
+    .sidebar {
+      align-self: start;
+      position: sticky;
+      top: 30px;
+      border-left: 1px solid var(--border);
+      padding-left: 20px;
+    }
+
+    .sidebar p {
+      color: #68758d;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 12px 0;
+      transition: color 0.25s;
+    }
+
+    .sidebar a:hover {
+      color: var(--cyan);
+    }
+
+    .article-body section {
+      margin-bottom: 55px;
+      scroll-margin-top: 30px;
+    }
+
+    .article-body h2 {
+      font-size: clamp(25px, 4vw, 34px);
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 22px;
+    }
+
+    .article-body h2 span {
+      color: var(--cyan);
+    }
+
+    .article-body p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 2;
+      margin-bottom: 18px;
+    }
+
+    .article-body strong {
+      color: var(--white);
+    }
+
+    .quote {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--cyan);
+      border-radius: 8px;
+      padding: 28px;
+      margin: 30px 0;
+      color: #e9f2ff;
+      font-size: 19px;
+      line-height: 1.7;
+    }
+
+    /* Principles */
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 25px;
+    }
+
+    .principle-card {
+      padding: 23px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .principle-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-3px);
+    }
+
+    .principle-card .number {
+      color: var(--blue);
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    .principle-card h3 {
+      font-size: 16px;
+      margin: 15px 0 8px;
+    }
+
+    .principle-card p {
+      font-size: 12px;
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    /* Conclusion */
+
+    .conclusion {
+      padding: 35px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background:
+        radial-gradient(
+          ellipse at top right,
+          rgba(0, 213, 255, 0.08),
+          transparent 65%
+        ),
+        var(--card);
+    }
+
+    .conclusion h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .conclusion p {
+      margin-bottom: 0;
+    }
+
+    .next-article {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-top: 35px;
+      padding: 25px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .next-article small {
+      display: block;
+      color: #75829b;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+    }
+
+    .next-article strong {
+      font-size: 15px;
+    }
+
+    .next-article a {
+      color: var(--cyan);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    footer {
+      border-top: 1px solid #181818;
+      padding: 30px 0;
+      color: #68758d;
+      font-size: 11px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(100% - 36px, 1000px);
+      }
+
+      .article-hero {
+        padding: 70px 0 45px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .article-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 45px 0;
+      }
+
+      .sidebar {
+        position: static;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 18px;
+        padding: 0 0 20px;
+        border-left: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .sidebar p {
+        width: 100%;
+        margin-bottom: 0;
+      }
+
+      .sidebar a {
+        margin: 4px 0;
+      }
+
+      .principles {
+        grid-template-columns: 1fr;
+      }
+
+      .conclusion {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="container">
+      <a href="index.html" class="logo">CODMIL<span>.</span></a>
+      <a href="index.html" class="back-link">← BACK TO ARTICLES</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="article-hero">
+      <div class="container">
+        <p class="eyebrow">DESIGN / USER EXPERIENCE</p>
+        <p class="article-number">ARTICLE 04</p>
+
+        <h1>
+          Designing for people,<br>
+          <span>not pixels.</span>
+        </h1>
+
+        <p class="hero-description">
+          Great design is not just about how something looks.
+          It is about how it feels, how easily it works, and
+          how naturally people can use it.
+        </p>
+
+        <div class="article-meta">
+          <span>Design Insights</span>
+          <span>6 min read</span>
+          <span>CODMIL Journal</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container article-layout">
+
+      <aside class="sidebar">
+        <p>IN THIS ARTICLE</p>
+        <a href="#introduction">Introduction</a>
+        <a href="#people-first">People first</a>
+        <a href="#simplicity">The power of simplicity</a>
+        <a href="#principles">Design principles</a>
+        <a href="#conclusion">Final thoughts</a>
+      </aside>
+
+      <article class="article-body">
+
+        <section id="introduction">
+          <h2>Design is more than <span>appearance.</span></h2>
+
+          <p>
+            We interact with digital products every day. We open
+            websites, navigate applications, complete purchases,
+            and search for information. Most of the time, we do not
+            stop to think about the design behind these experiences.
+          </p>
+
+          <p>
+            That is often the sign of good design. The experience
+            feels natural because someone has carefully considered
+            every interaction, decision, and detail.
+          </p>
+
+          <div class="quote">
+            The best interfaces do not demand attention.
+            They help people focus on what matters.
+          </div>
+
+          <p>
+            At CODMIL, the goal is to approach digital design as
+            a problem-solving process. Visual quality matters, but
+            it should always support a clear and useful experience.
+          </p>
+        </section>
+
+        <section id="people-first">
+          <h2>Start with <span>people.</span></h2>
+
+          <p>
+            Before choosing colors, typography, or animations,
+            understand the people who will use the product.
+            What are they trying to accomplish? What information
+            do they need? What might confuse or slow them down?
+          </p>
+
+          <p>
+            These questions help turn design from decoration into
+            a practical solution. A successful interface reflects
+            real user needs instead of simply following trends.
+          </p>
+
+          <p>
+            <strong>Understand the problem first.</strong> Research,
+            observation, and feedback can reveal the small
+            frustrations that have the biggest impact on usability.
+          </p>
+        </section>
+
+        <section id="simplicity">
+          <h2>The power of <span>simplicity.</span></h2>
+
+          <p>
+            Every extra element competes for attention. Too many
+            buttons, inconsistent spacing, unclear labels, and
+            unnecessary effects can make a simple task feel difficult.
+          </p>
+
+          <p>
+            Simplicity does not mean removing everything. It means
+            keeping what is useful and making the important things
+            easier to discover.
+          </p>
+
+          <p>
+            Clear hierarchy guides the eye. Consistent patterns
+            make navigation predictable. Helpful feedback lets
+            people understand what happens after each action.
+          </p>
+
+          <p>
+            When these details work together, the interface feels
+            effortless without sacrificing functionality.
+          </p>
+        </section>
+
+        <section id="principles">
+          <h2>Four principles of <span>better design.</span></h2>
+
+          <p>
+            These principles offer a practical starting point for
+            building more useful and memorable digital experiences.
+          </p>
+
+          <div class="principles">
+
+            <div class="principle-card">
+              <span class="number">01</span>
+              <h3>Clarity</h3>
+              <p>
+                Make actions, information, and navigation easy
+                to understand at a glance.
+              </p>
+            </div>
+
+            <div class="principle-card">
+              <span class="number">02</span>
+              <h3>Consistency</h3>
+              <p>
+                Use familiar patterns, repeatable components,
+                and predictable interactions.
+              </p>
+            </div>
+
+            <div class="principle-card">
+              <span class="number">03</span>
+              <h3>Accessibility</h3>
+              <p>
+                Consider contrast, readable text, keyboard access,
+                and different user abilities.
+              </p>
+            </div>
+
+            <div class="principle-card">
+              <span class="number">04</span>
+              <h3>Feedback</h3>
+              <p>
+                Show users when actions succeed, fail, or need
+                another step.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <section>
+          <h2>Details make the <span>difference.</span></h2>
+
+          <p>
+            Good design is often found in the details people
+            barely notice: a button that responds immediately,
+            a form that explains an error, a heading that makes
+            a page easy to scan, or a mobile layout that feels
+            just as considered as the desktop version.
+          </p>
+
+          <p>
+            These small decisions build trust. They communicate
+            that the product respects the user's time and effort.
+          </p>
+
+          <p>
+            Testing with real users and improving the experience
+            over time helps turn these decisions into lasting value.
+          </p>
+        </section>
+
+        <section id="conclusion" class="conclusion">
+          <h2>Design with purpose.</h2>
+
+          <p>
+            Great interfaces are not created by adding more
+            visual effects. They are created by understanding
+            people, removing unnecessary friction, and making
+            useful actions feel natural.
+          </p>
+
+          <p>
+            When people can focus on their goals instead of
+            figuring out the interface, design is doing its job.
+          </p>
+        </section>
+
+        <div class="next-article">
+          <div>
+            <small>CONTINUE EXPLORING</small>
+            <strong>Code that works smarter.</strong>
+          </div>
+          <a href="read-5.html">READ 5 →</a>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© CODMIL. All rights reserved.</span>
+      <a href="index.html">Back to home ↑</a>
+    </div>
+  </footer>
+
+</body>
+</html>

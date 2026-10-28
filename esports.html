@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VORTEX — Esports Arena</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --bg:#07070d;
+  --card:#10101a;
+  --card2:#151522;
+  --purple:#8b5cf6;
+  --pink:#ec4899;
+  --cyan:#22d3ee;
+  --green:#22c55e;
+  --text:#f8fafc;
+  --muted:#8b8da3;
+  --border:rgba(255,255,255,.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(circle at 80% 10%,rgba(139,92,246,.15),transparent 30%),
+    radial-gradient(circle at 10% 40%,rgba(236,72,153,.08),transparent 25%),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,sans-serif;
+  overflow-x:hidden;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.container{
+  width:min(1180px,92%);
+  margin:auto;
+}
+
+/* NAVBAR */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:1000;
+  background:rgba(7,7,13,.78);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+  height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:Orbitron,sans-serif;
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:2px;
+}
+
+.logo span{
+  color:var(--purple);
+}
+
+.nav-links{
+  display:flex;
+  gap:30px;
+  list-style:none;
+  color:#b7b8c8;
+  font-size:14px;
+  font-weight:600;
+}
+
+.nav-links a:hover{
+  color:white;
+}
+
+.nav-btn{
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  padding:11px 19px;
+  border-radius:9px;
+  font-size:13px;
+  font-weight:800;
+}
+
+.menu{
+  display:none;
+  font-size:25px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  min-height:760px;
+  display:flex;
+  align-items:center;
+  position:relative;
+  padding-top:80px;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:var(--purple);
+  filter:blur(180px);
+  opacity:.12;
+  right:-150px;
+  top:100px;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:60px;
+  align-items:center;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 13px;
+  border:1px solid rgba(139,92,246,.3);
+  background:rgba(139,92,246,.08);
+  color:#c4b5fd;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:22px;
+}
+
+.live-dot{
+  width:7px;
+  height:7px;
+  background:#ef4444;
+  border-radius:50%;
+  box-shadow:0 0 12px #ef4444;
+}
+
+.hero h1{
+  font-family:Orbitron,sans-serif;
+  font-size:clamp(45px,6vw,78px);
+  line-height:1.02;
+  letter-spacing:-3px;
+  margin-bottom:22px;
+}
+
+.gradient{
+  background:linear-gradient(90deg,#fff,var(--purple),var(--pink));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:570px;
+  color:var(--muted);
+  line-height:1.8;
+  font-size:16px;
+  margin-bottom:30px;
+}
+
+.buttons{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:14px 22px;
+  border-radius:10px;
+  font-size:14px;
+  font-weight:800;
+  transition:.25s;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+}
+
+.btn-secondary{
+  border:1px solid var(--border);
+  background:#ffffff05;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+/* HERO VISUAL */
+.hero-card{
+  height:470px;
+  position:relative;
+  border-radius:24px;
+  border:1px solid var(--border);
+  overflow:hidden;
+  background:
+    linear-gradient(145deg,#191329,#090912);
+  box-shadow:0 30px 100px rgba(0,0,0,.5);
+}
+
+.hero-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(120deg,transparent 30%,rgba(139,92,246,.2),transparent 70%),
+    repeating-linear-gradient(0deg,transparent 0 39px,#ffffff04 40px),
+    repeating-linear-gradient(90deg,transparent 0 39px,#ffffff04 40px);
+}
+
+.character{
+  position:absolute;
+  width:250px;
+  height:340px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-45%);
+  background:
+    radial-gradient(circle at 50% 25%,#d8b4fe 0 9%,transparent 10%),
+    linear-gradient(160deg,#a855f7,#181126 55%,#ec4899);
+  clip-path:polygon(40% 0,60% 0,72% 15%,90% 25%,78% 50%,100% 100%,0 100%,22% 50%,10% 25%,28% 15%);
+  filter:drop-shadow(0 0 35px rgba(168,85,247,.45));
+}
+
+.character::after{
+  content:"V";
+  position:absolute;
+  font-family:Orbitron;
+  font-size:90px;
+  font-weight:900;
+  left:80px;
+  top:140px;
+  color:#fff;
+  opacity:.8;
+}
+
+.hero-stat{
+  position:absolute;
+  padding:14px 17px;
+  background:rgba(10,10,18,.8);
+  backdrop-filter:blur(10px);
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+.hero-stat strong{
+  display:block;
+  font-family:Orbitron;
+  font-size:20px;
+}
+
+.hero-stat small{
+  color:var(--muted);
+}
+
+.stat-one{left:18px;bottom:22px}
+.stat-two{right:18px;top:22px}
+
+/* SECTIONS */
+section{
+  padding:90px 0;
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:30px;
+}
+
+.eyebrow{
+  color:var(--purple);
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:9px;
+}
+
+.section-title{
+  font-family:Orbitron;
+  font-size:28px;
+}
+
+.view-all{
+  color:#aaaabd;
+  font-size:13px;
+}
+
+/* MATCHES */
+.matches{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.match{
+  background:linear-gradient(145deg,var(--card),#0d0d15);
+  border:1px solid var(--border);
+  padding:20px;
+  border-radius:15px;
+  transition:.25s;
+}
+
+.match:hover{
+  border-color:#8b5cf644;
+  transform:translateY(-5px);
+}
+
+.match-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
+
+.game{
+  font-size:11px;
+  color:#a5a6b7;
+  font-weight:700;
+  text-transform:uppercase;
+}
+
+.live{
+  color:#fb7185;
+  font-size:11px;
+  font-weight:800;
+}
+
+.teams{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  text-align:center;
+}
+
+.team{
+  width:40%;
+}
+
+.team-logo{
+  width:55px;
+  height:55px;
+  margin:auto auto 9px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:linear-gradient(135deg,#242437,#171722);
+  border:1px solid var(--border);
+  font-family:Orbitron;
+  font-weight:900;
+  color:#c4b5fd;
+}
+
+.team-name{
+  font-size:12px;
+  font-weight:700;
+}
+
+.score{
+  font-family:Orbitron;
+  font-size:23px;
+  font-weight:800;
+}
+
+.vs{
+  color:#56576b;
+  font-size:11px;
+}
+
+/* TOURNAMENT */
+.tournaments{
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:18px;
+}
+
+.tournament{
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  background:var(--card);
+}
+
+.tournament-banner{
+  height:210px;
+  position:relative;
+  background:
+    linear-gradient(120deg,rgba(10,10,18,.2),#0a0912),
+    radial-gradient(circle at 70% 40%,#9333ea,transparent 35%),
+    radial-gradient(circle at 30% 60%,#db2777,transparent 30%);
+}
+
+.banner-text{
+  position:absolute;
+  left:25px;
+  bottom:23px;
+}
+
+.banner-text small{
+  color:#d8b4fe;
+  font-weight:700;
+}
+
+.banner-text h3{
+  font-family:Orbitron;
+  font-size:27px;
+  margin-top:6px;
+}
+
+.tournament-info{
+  padding:20px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.info-item small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-bottom:5px;
+}
+
+.info-item strong{
+  font-size:13px;
+}
+
+/* LEADERBOARD */
+.leaderboard{
+  border:1px solid var(--border);
+  border-radius:17px;
+  overflow:hidden;
+  background:var(--card);
+}
+
+.player{
+  display:grid;
+  grid-template-columns:40px 1fr 100px 80px;
+  align-items:center;
+  gap:15px;
+  padding:17px 20px;
+  border-bottom:1px solid var(--border);
+}
+
+.player:last-child{
+  border:0;
+}
+
+.rank{
+  color:#66677a;
+  font-family:Orbitron;
+  font-size:12px;
+}
+
+.player-info{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.avatar{
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  font-weight:900;
+}
+
+.player-info small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+.kd{
+  color:#c4b5fd;
+  font-weight:800;
+}
+
+.earnings{
+  color:#4ade80;
+  font-weight:700;
+}
+
+/* CTA */
+.cta{
+  text-align:center;
+  border:1px solid rgba(139,92,246,.2);
+  border-radius:22px;
+  padding:65px 25px;
+  background:
+    radial-gradient(circle at center,rgba(139,92,246,.14),transparent 55%),
+    var(--card);
+}
+
+.cta h2{
+  font-family:Orbitron;
+  font-size:35px;
+  margin-bottom:13px;
+}
+
+.cta p{
+  color:var(--muted);
+  margin-bottom:25px;
+}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:30px 0;
+  color:#66677a;
+  font-size:12px;
+}
+
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+}
+
+/* MOBILE */
+@media(max-width:800px){
+  .nav-links,.nav-btn{
+    display:none;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  .nav-links.active{
+    display:flex;
+    position:absolute;
+    top:76px;
+    left:0;
+    width:100%;
+    padding:25px;
+    background:#0a0a11;
+    flex-direction:column;
+    border-bottom:1px solid var(--border);
+  }
+
+  .hero{
+    min-height:auto;
+    padding:140px 0 70px;
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-card{
+    height:390px;
+  }
+
+  .matches{
+    grid-template-columns:1fr;
+  }
+
+  .tournaments{
+    grid-template-columns:1fr;
+  }
+
+  .player{
+    grid-template-columns:30px 1fr 60px;
+  }
+
+  .player .earnings{
+    display:none;
+  }
+
+  .section-head{
+    align-items:start;
+    gap:15px;
+  }
+
+  .cta h2{
+    font-size:25px;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+    gap:10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">VORTEX<span>.</span></a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#matches">Matches</a></li>
+      <li><a href="#tournaments">Tournaments</a></li>
+      <li><a href="#players">Rankings</a></li>
+      <li><a href="#teams">Teams</a></li>
+    </ul>
+
+    <a href="#tournaments" class="nav-btn">JOIN ARENA</a>
+    <div class="menu" onclick="toggleMenu()">☰</div>
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+
+    <div>
+      <div class="badge">
+        <span class="live-dot"></span>
+        LIVE ESPORTS HUB
+      </div>
+
+      <h1>
+        ENTER THE<br>
+        <span class="gradient">BATTLEFIELD.</span>
+      </h1>
+
+      <p>
+        Your ultimate esports arena for live matches, competitive
+        tournaments, elite teams and the world's top gaming talent.
+      </p>
+
+      <div class="buttons">
+        <a href="#matches" class="btn btn-primary">WATCH LIVE →</a>
+        <a href="#tournaments" class="btn btn-secondary">EXPLORE TOURNAMENTS</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="character"></div>
+
+      <div class="hero-stat stat-one">
+        <small>ACTIVE PLAYERS</small>
+        <strong>2.4M+</strong>
+      </div>
+
+      <div class="hero-stat stat-two">
+        <small>LIVE NOW</small>
+        <strong style="color:#4ade80">48,291</strong>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MATCHES -->
+<section id="matches">
+  <div class="container">
+
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Live right now</div>
+        <h2 class="section-title">LIVE MATCHES</h2>
+      </div>
+      <a href="#" class="view-all">View all matches →</a>
+    </div>
+
+    <div class="matches">
+
+      <div class="match">
+        <div class="match-top">
+          <span class="game">VALORANT • PLAYOFF</span>
+          <span class="live">● LIVE</span>
+        </div>
+
+        <div class="teams">
+          <div class="team">
+            <div class="team-logo">NV</div>
+            <div class="team-name">NOVA</div>
+          </div>
+
+          <div>
+            <div class="score">2 — 1</div>
+            <div class="vs">MAP 4</div>
+          </div>
+
+          <div class="team">
+            <div class="team-logo">RX</div>
+            <div class="team-name">REX</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="match">
+        <div class="match-top">
+          <span class="game">CS2 • SEMIFINAL</span>
+          <span class="live">● LIVE</span>
+        </div>
+
+        <div class="teams">
+          <div class="team">
+            <div class="team-logo">FN</div>
+            <div class="team-name">FALCON</div>
+          </div>
+
+          <div>
+            <div class="score">1 — 1</div>
+            <div class="vs">ROUND 19</div>
+          </div>
+
+          <div class="team">
+            <div class="team-logo">TK</div>
+            <div class="team-name">TITAN</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="match">
+        <div class="match-top">
+          <span class="game">APEX • FINALS</span>
+          <span class="live">● LIVE</span>
+        </div>
+
+        <div class="teams">
+          <div class="team">
+            <div class="team-logo">ZG</div>
+            <div class="team-name">ZERO G</div>
+          </div>
+
+          <div>
+            <div class="score">184</div>
+            <div class="vs">POINTS</div>
+          </div>
+
+          <div class="team">
+            <div class="team-logo">VP</div>
+            <div class="team-name">VORTEX</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TOURNAMENTS -->
+<section id="tournaments">
+  <div class="container">
+
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Compete & conquer</div>
+        <h2 class="section-title">FEATURED TOURNAMENTS</h2>
+      </div>
+    </div>
+
+    <div class="tournaments">
+
+      <div class="tournament">
+        <div class="tournament-banner">
+          <div class="banner-text">
+            <small>VORTEX CHAMPIONSHIP 2026</small>
+            <h3>RISE OF LEGENDS</h3>
+          </div>
+        </div>
+
+        <div class="tournament-info">
+          <div class="info-item">
+            <small>PRIZE POOL</small>
+            <strong>$250,000</strong>
+          </div>
+          <div class="info-item">
+            <small>TEAMS</small>
+            <strong>32</strong>
+          </div>
+          <div class="info-item">
+            <small>STARTS</small>
+            <strong>OCT 24</strong>
+          </div>
+          <a href="#" class="btn btn-primary">JOIN</a>
+        </div>
+      </div>
+
+      <div class="tournament" style="padding:25px;">
+        <div class="eyebrow">Upcoming</div>
+        <h3 style="font-family:Orbitron;margin-bottom:20px;">
+          WEEKLY SHOWDOWN
+        </h3>
+
+        <div style="display:flex;justify-content:space-between;
+                    padding:15px 0;border-bottom:1px solid var(--border);">
+          <span>Valorant Cup</span>
+          <strong style="color:#c4b5fd">OCT 12</strong>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;
+                    padding:15px 0;border-bottom:1px solid var(--border);">
+          <span>CS2 Clash</span>
+          <strong style="color:#c4b5fd">OCT 15</strong>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;padding:15px 0;">
+          <span>Apex Arena</span>
+          <strong style="color:#c4b5fd">OCT 18</strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LEADERBOARD -->
+<section id="players">
+  <div class="container">
+
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Top performers</div>
+        <h2 class="section-title">GLOBAL LEADERBOARD</h2>
+      </div>
+      <a href="#" class="view-all">Full rankings →</a>
+    </div>
+
+    <div class="leaderboard">
+
+      <div class="player">
+        <div class="rank">01</div>
+        <div class="player-info">
+          <div class="avatar">K</div>
+          <div>
+            <strong>KRYPT</strong>
+            <small>Nova Esports</small>
+          </div>
+        </div>
+        <div class="kd">2.91 K/D</div>
+        <div class="earnings">$84.2K</div>
+      </div>
+
+      <div class="player">
+        <div class="rank">02</div>
+        <div class="player-info">
+          <div class="avatar">Z</div>
+          <div>
+            <strong>ZENITH</strong>
+            <small>Falcon Gaming</small>
+          </div>
+        </div>
+        <div class="kd">2.76 K/D</div>
+        <div class="earnings">$79.8K</div>
+      </div>
+
+      <div class="player">
+        <div class="rank">03</div>
+        <div class="player-info">
+          <div class="avatar">R</div>
+          <div>
+            <strong>RAVEN</strong>
+            <small>Titan Core</small>
+          </div>
+        </div>
+        <div class="kd">2.68 K/D</div>
+        <div class="earnings">$72.5K</div>
+      </div>
+
+      <div class="player">
+        <div class="rank">04</div>
+        <div class="player-info">
+          <div class="avatar">V</div>
+          <div>
+            <strong>VEX</strong>
+            <small>Zero Gravity</small>
+          </div>
+        </div>
+        <div class="kd">2.61 K/D</div>
+        <div class="earnings">$68.1K</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="teams">
+  <div class="container">
+    <div class="cta">
+      <div class="eyebrow">Your next victory awaits</div>
+      <h2>READY TO ENTER THE ARENA?</h2>
+      <p>Build your squad. Enter tournaments. Become legendary.</p>
+      <a href="#" class="btn btn-primary">CREATE YOUR TEAM →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>© 2026 VORTEX ESPORTS. ALL RIGHTS RESERVED.</div>
+    <div>PLAY • COMPETE • CONQUER</div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("active");
+}
+
+// Close mobile menu after clicking a link
+document.querySelectorAll(".nav-links a").forEach(link=>{
+  link.addEventListener("click",()=>{
+    document.getElementById("navLinks").classList.remove("active");
+  });
+});
+
+// Simple live score animation
+const scores = document.querySelectorAll(".score");
+
+setInterval(()=>{
+  scores.forEach(score=>{
+    if(Math.random() > .7){
+      score.style.transform = "scale(1.08)";
+      score.style.color = "#a78bfa";
+
+      setTimeout(()=>{
+        score.style.transform = "scale(1)";
+        score.style.color = "";
+      },250);
+    }
+  });
+},3000);
+</script>
+
+</body>
+</html>

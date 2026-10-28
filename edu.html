@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduSpark - Learn Without Limits</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    :root {
+      --primary: #4f46e5;
+      --secondary: #7c3aed;
+      --dark: #172033;
+      --text: #4b5563;
+      --light: #f5f7ff;
+      --white: #ffffff;
+      --green: #10b981;
+      --orange: #f59e0b;
+      --red: #ef4444;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f8faff;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .login-btn {
+      background: var(--primary);
+      color: white !important;
+      padding: 9px 18px;
+      border-radius: 8px;
+    }
+
+    /* HERO */
+    .hero {
+      background:
+        radial-gradient(circle at 80% 20%, #ddd6fe 0, transparent 28%),
+        linear-gradient(135deg, #eef2ff, #faf5ff);
+      padding: 90px 20px;
+    }
+
+    .hero-container {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 68px);
+      line-height: 1.05;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: var(--text);
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 23px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #4338ca;
+    }
+
+    .btn-outline {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .hero-card {
+      background: white;
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 20px 60px rgba(79,70,229,.15);
+    }
+
+    .hero-card .illustration {
+      height: 260px;
+      border-radius: 20px;
+      background: linear-gradient(135deg,#4f46e5,#8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 100px;
+      margin-bottom: 20px;
+    }
+
+    /* GENERAL */
+    section {
+      padding: 80px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title h2 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--text);
+    }
+
+    /* SEARCH */
+    .search-box {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      display: flex;
+      background: white;
+      border-radius: 12px;
+      padding: 7px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 14px;
+      font-size: 16px;
+    }
+
+    /* SUBJECTS */
+    .subjects {
+      background: white;
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 20px;
+    }
+
+    .subject-card {
+      background: #f8faff;
+      padding: 25px;
+      border-radius: 16px;
+      transition: .3s;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.08);
+    }
+
+    .subject-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .subject-card h3 {
+      margin-bottom: 7px;
+    }
+
+    .subject-card p {
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    /* COURSES */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 25px;
+    }
+
+    .course-card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,.07);
+    }
+
+    .course-image {
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 70px;
+    }
+
+    .math {
+      background: #dbeafe;
+    }
+
+    .science {
+      background: #dcfce7;
+    }
+
+    .coding {
+      background: #f3e8ff;
+    }
+
+    .course-content {
+      padding: 22px;
+    }
+
+    .course-content h3 {
+      margin-bottom: 8px;
+    }
+
+    .course-content p {
+      color: var(--text);
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .progress {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--primary);
+    }
+
+    .course-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    /* FEATURES */
+    .features {
+      background: #172033;
+      color: white;
+    }
+
+    .features .section-title p {
+      color: #cbd5e1;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 25px;
+    }
+
+    .feature {
+      padding: 30px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 18px;
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .feature p {
+      color: #cbd5e1;
+      margin-top: 8px;
+    }
+
+    /* QUIZ */
+    .quiz-section {
+      background: #eef2ff;
+    }
+
+    .quiz {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .question {
+      font-size: 21px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .answers button {
+      width: 100%;
+      text-align: left;
+      background: #f8fafc;
+      border: 2px solid #e5e7eb;
+      padding: 14px;
+      margin: 7px 0;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .answers button:hover {
+      border-color: var(--primary);
+      background: #eef2ff;
+    }
+
+    #quiz-result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 20px;
+    }
+
+    .stat {
+      background: white;
+      padding: 25px;
+      text-align: center;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.06);
+    }
+
+    .stat h3 {
+      color: var(--primary);
+      font-size: 35px;
+    }
+
+    .stat p {
+      color: var(--text);
+    }
+
+    /* CTA */
+    .cta {
+      background: linear-gradient(135deg,#4f46e5,#7c3aed);
+      color: white;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      margin-bottom: 25px;
+      color: #ede9fe;
+    }
+
+    .cta .btn {
+      background: white;
+      color: var(--primary);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0f172a;
+      color: white;
+      padding: 50px 20px 20px;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    footer h3 {
+      margin-bottom: 15px;
+    }
+
+    footer p, footer a {
+      color: #94a3b8;
+      text-decoration: none;
+      display: block;
+      margin: 8px 0;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid #334155;
+      text-align: center;
+      color: #94a3b8;
+    }
+
+    /* MOBILE */
+    @media(max-width: 900px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+      }
+
+      .subject-grid {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .course-grid,
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+
+      .subject-grid,
+      .stats,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 55px 15px;
+      }
+
+      .hero {
+        padding: 60px 15px;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+      }
+
+      .section-title h2 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">Edu<span>Spark</span> 🎓</div>
+
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#subjects">Subjects</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#login" class="login-btn">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <div class="hero-container">
+
+      <div>
+        <h1>Learn Today.<br><span>Build Tomorrow.</span></h1>
+
+        <p>
+          Welcome to EduSpark, your interactive learning platform for
+          discovering new subjects, improving your skills and reaching
+          your educational goals.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#courses" class="btn btn-primary">Explore Courses</a>
+          <a href="#quiz" class="btn btn-outline">Take a Quiz</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="illustration">📚</div>
+        <h2>Your Learning Journey</h2>
+        <p>Learn at your own pace with interactive lessons and quizzes.</p>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- SEARCH -->
+  <section>
+    <div class="container">
+
+      <div class="section-title">
+        <h2>What do you want to learn?</h2>
+        <p>Search for subjects, courses and learning resources.</p>
+      </div>
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search courses..."
+          onkeyup="searchCourses()"
+        >
+        <button class="btn btn-primary">🔍 Search</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SUBJECTS -->
+  <section class="subjects" id="subjects">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Popular Subjects</h2>
+        <p>Choose a subject and start learning.</p>
+      </div>
+
+      <div class="subject-grid">
+
+        <div class="subject-card">
+          <div class="subject-icon">🔢</div>
+          <h3>Mathematics</h3>
+          <p>Numbers, algebra, geometry and problem solving.</p>
+        </div>
+
+        <div class="subject-card">
+          <div class="subject-icon">🔬</div>
+          <h3>Science</h3>
+          <p>Explore physics, chemistry, biology and more.</p>
+        </div>
+
+        <div class="subject-card">
+          <div class="subject-icon">💻</div>
+          <h3>Computer Science</h3>
+          <p>Learn programming, technology and computer concepts.</p>
+        </div>
+
+        <div class="subject-card">
+          <div class="subject-icon">🌎</div>
+          <h3>Geography</h3>
+          <p>Discover countries, maps, climate and our planet.</p>
+        </div>
+
+        <div class="subject-card">
+          <div class="subject-icon">📖</div>
+          <h3>English</h3>
+          <p>Improve grammar, vocabulary, reading and writing.</p>
+        </div>
+
+        <div class="subject-card">
+          <div class="subject-icon">🏛️</div>
+          <h3>History</h3>
+          <p>Explore important events and civilizations.</p>
+        </div>
+
+        <div class="subject-card">
+          <div class="subject-icon">🎨</div>
+          <h3>Arts</h3>
+          <p>Discover creativity, design, drawing and culture.</p>
+        </div>
+
+        <div class="subject-card">
+          <div class="subject-icon">💰</div>
+          <h3>Economics</h3>
+          <p>Understand money, business, markets and finance.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section id="courses">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Featured Courses</h2>
+        <p>Start learning something new today.</p>
+      </div>
+
+      <div class="course-grid" id="courseGrid">
+
+        <div class="course-card">
+          <div class="course-image math">➗</div>
+          <div class="course-content">
+            <h3>Mathematics Fundamentals</h3>
+            <p>Build a strong foundation in mathematics.</p>
+
+            <div class="progress">
+              <div class="progress-bar" style="width:75%"></div>
+            </div>
+
+            <div class="course-meta">
+              <span>75% complete</span>
+              <span>12 lessons</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-image science">🧪</div>
+          <div class="course-content">
+            <h3>Introduction to Science</h3>
+            <p>Discover how the world around us works.</p>
+
+            <div class="progress">
+              <div class="progress-bar" style="width:45%"></div>
+            </div>
+
+            <div class="course-meta">
+              <span>45% complete</span>
+              <span>15 lessons</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-card">
+          <div class="course-image coding">👨‍💻</div>
+          <div class="course-content">
+            <h3>Learn Programming</h3>
+            <p>Start coding with HTML, CSS and JavaScript.</p>
+
+            <div class="progress">
+              <div class="progress-bar" style="width:30%"></div>
+            </div>
+
+            <div class="course-meta">
+              <span>30% complete</span>
+              <span>20 lessons</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section>
+    <div class="container">
+
+      <div class="stats">
+
+        <div class="stat">
+          <h3>50K+</h3>
+          <p>Students</p>
+        </div>
+
+        <div class="stat">
+          <h3>200+</h3>
+          <p>Courses</p>
+        </div>
+
+        <div class="stat">
+          <h3>50+</h3>
+          <p>Subjects</p>
+        </div>
+
+        <div class="stat">
+          <h3>95%</h3>
+          <p>Success Rate</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="about">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Why Choose EduSpark?</h2>
+        <p>Everything you need to make learning easier and more enjoyable.</p>
+      </div>
+
+      <div class="feature-grid">
+
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <h3>Learn at Your Pace</h3>
+          <p>
+            Study whenever you want and continue from where you stopped.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🧠</div>
+          <h3>Interactive Learning</h3>
+          <p>
+            Learn through quizzes, activities and engaging educational content.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">📈</div>
+          <h3>Track Progress</h3>
+          <p>
+            Monitor your learning progress and celebrate your achievements.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="quiz-section" id="quiz">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Quick Knowledge Quiz 🧠</h2>
+        <p>Test your knowledge with a simple question.</p>
+      </div>
+
+      <div class="quiz">
+
+        <div class="question">
+          What is the largest planet in our Solar System?
+        </div>
+
+        <div class="answers">
+          <button onclick="checkAnswer(this, false)">A. Earth</button>
+          <button onclick="checkAnswer(this, false)">B. Mars</button>
+          <button onclick="checkAnswer(this, true)">C. Jupiter</button>
+          <button onclick="checkAnswer(this, false)">D. Venus</button>
+        </div>
+
+        <div id="quiz-result"></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to Start Learning?</h2>
+      <p>Take the first step toward achieving your educational goals.</p>
+      <a href="#courses" class="btn">Start Learning 🚀</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="footer-grid">
+
+      <div>
+        <h3>EduSpark 🎓</h3>
+        <p>
+          A modern educational platform designed to make learning
+          simple, interactive and enjoyable.
+        </p>
+      </div>
+
+      <div>
+        <h3>Platform</h3>
+        <a href="#courses">Courses</a>
+        <a href="#subjects">Subjects</a>
+        <a href="#quiz">Quizzes</a>
+        <a href="#about">Features</a>
+      </div>
+
+      <div>
+        <h3>Resources</h3>
+        <a href="#">Study Materials</a>
+        <a href="#">Learning Guides</a>
+        <a href="#">Practice Tests</a>
+        <a href="#">Certificates</a>
+      </div>
+
+      <div id="login">
+        <h3>Contact</h3>
+        <a href="mailto:hello@eduspark.com">hello@eduspark.com</a>
+        <a href="#">Help Center</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+
+    </div>
+
+    <div class="copyright">
+      © 2026 EduSpark. All rights reserved.
+    </div>
+
+  </footer>
+
+  <script>
+    /* QUIZ */
+    function checkAnswer(button, correct) {
+      const result = document.getElementById("quiz-result");
+
+      const buttons = document.querySelectorAll(".answers button");
+
+      buttons.forEach(btn => {
+        btn.disabled = true;
+      });
+
+      if (correct) {
+        button.style.background = "#dcfce7";
+        button.style.borderColor = "#10b981";
+        result.innerHTML = "✅ Correct! Jupiter is the largest planet.";
+        result.style.color = "#059669";
+      } else {
+        button.style.background = "#fee2e2";
+        button.style.borderColor = "#ef4444";
+        result.innerHTML = "❌ Not quite. The correct answer is Jupiter.";
+        result.style.color = "#dc2626";
+      }
+    }
+
+    /* SEARCH */
+    function searchCourses() {
+      const input = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+      const cards = document.querySelectorAll(".course-card");
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+
+        if (text.includes(input)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    /* BUTTON ANIMATION */
+    document.querySelectorAll(".btn").forEach(button => {
+      button.addEventListener("click", function() {
+        this.style.transform = "scale(.97)";
+
+        setTimeout(() => {
+          this.style.transform = "";
+        }, 120);
+      });
+    });
+  </script>
+
+</body>
+</html>

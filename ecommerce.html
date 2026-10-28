@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VORTEX — Gaming Store</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --bg:#07070d;
+  --card:#10101a;
+  --card2:#151522;
+  --purple:#8b5cf6;
+  --pink:#ec4899;
+  --cyan:#22d3ee;
+  --green:#22c55e;
+  --red:#ef4444;
+  --text:#f8fafc;
+  --muted:#9293a7;
+  --border:rgba(255,255,255,.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(circle at 85% 0%,rgba(139,92,246,.13),transparent 28%),
+    radial-gradient(circle at 5% 35%,rgba(236,72,153,.07),transparent 25%),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,sans-serif;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button{
+  font-family:inherit;
+}
+
+.container{
+  width:min(1200px,92%);
+  margin:auto;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+  height:76px;
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:1000;
+  background:rgba(7,7,13,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+}
+
+.logo{
+  font-family:Orbitron;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:2px;
+  white-space:nowrap;
+}
+
+.logo span{
+  color:var(--purple);
+}
+
+.nav-links{
+  display:flex;
+  list-style:none;
+  gap:27px;
+  color:#b9bac9;
+  font-size:13px;
+  font-weight:700;
+}
+
+.nav-links a{
+  transition:.2s;
+}
+
+.nav-links a:hover{
+  color:white;
+}
+
+.search{
+  width:220px;
+  position:relative;
+}
+
+.search input{
+  width:100%;
+  padding:11px 14px 11px 38px;
+  border-radius:9px;
+  border:1px solid var(--border);
+  background:#ffffff06;
+  color:white;
+  outline:none;
+}
+
+.search input:focus{
+  border-color:#8b5cf666;
+}
+
+.search-icon{
+  position:absolute;
+  left:13px;
+  top:10px;
+  color:#77788a;
+}
+
+.cart-btn{
+  border:0;
+  cursor:pointer;
+  color:white;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  padding:11px 15px;
+  border-radius:9px;
+  font-size:13px;
+  font-weight:800;
+  position:relative;
+}
+
+.cart-count{
+  position:absolute;
+  right:-7px;
+  top:-7px;
+  background:#ef4444;
+  width:19px;
+  height:19px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  font-size:10px;
+}
+
+.menu{
+  display:none;
+  font-size:25px;
+  cursor:pointer;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  min-height:650px;
+  padding-top:76px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  width:500px;
+  height:500px;
+  right:-170px;
+  top:70px;
+  background:var(--purple);
+  opacity:.14;
+  filter:blur(170px);
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:70px;
+}
+
+.badge{
+  display:inline-flex;
+  padding:8px 13px;
+  background:#8b5cf612;
+  border:1px solid #8b5cf633;
+  border-radius:30px;
+  color:#c4b5fd;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.5px;
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-family:Orbitron;
+  font-size:clamp(42px,5.5vw,72px);
+  line-height:1.04;
+  letter-spacing:-3px;
+  margin-bottom:20px;
+}
+
+.gradient{
+  background:linear-gradient(90deg,var(--purple),var(--pink));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  color:var(--muted);
+  max-width:540px;
+  line-height:1.8;
+  margin-bottom:28px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:12px;
+}
+
+.btn{
+  border:0;
+  cursor:pointer;
+  display:inline-block;
+  padding:14px 21px;
+  border-radius:9px;
+  font-size:13px;
+  font-weight:800;
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  color:white;
+}
+
+.btn-dark{
+  border:1px solid var(--border);
+  background:#ffffff05;
+  color:white;
+}
+
+/* HERO PRODUCT */
+
+.hero-product{
+  height:440px;
+  position:relative;
+  border-radius:24px;
+  border:1px solid var(--border);
+  background:
+    radial-gradient(circle at 50% 40%,#7134d633,transparent 42%),
+    linear-gradient(145deg,#171321,#09090f);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.headset{
+  width:260px;
+  height:260px;
+  position:relative;
+  border:27px solid #252537;
+  border-bottom-color:#8b5cf6;
+  border-radius:50%;
+  transform:rotate(-8deg);
+  filter:drop-shadow(0 0 35px #8b5cf655);
+}
+
+.headset::before{
+  content:"";
+  position:absolute;
+  width:205px;
+  height:110px;
+  border-radius:20px;
+  border-left:24px solid #29293b;
+  border-right:24px solid #29293b;
+  left:-1px;
+  top:65px;
+}
+
+.headset::after{
+  content:"";
+  position:absolute;
+  width:75px;
+  height:32px;
+  border-radius:8px;
+  background:#ec4899;
+  right:-58px;
+  bottom:20px;
+  transform:rotate(10deg);
+  box-shadow:0 0 25px #ec489955;
+}
+
+.hero-product-label{
+  position:absolute;
+  left:22px;
+  bottom:20px;
+  padding:13px 16px;
+  background:#080810dd;
+  border:1px solid var(--border);
+  border-radius:11px;
+}
+
+.hero-product-label small{
+  color:var(--muted);
+  display:block;
+  font-size:10px;
+}
+
+.hero-product-label strong{
+  display:block;
+  margin-top:4px;
+  font-family:Orbitron;
+}
+
+/* ================= CATEGORY ================= */
+
+section{
+  padding:75px 0;
+}
+
+.section-title{
+  font-family:Orbitron;
+  font-size:27px;
+  margin-bottom:8px;
+}
+
+.section-subtitle{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:28px;
+}
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.category{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:25px;
+  text-align:center;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.category:hover{
+  transform:translateY(-5px);
+  border-color:#8b5cf655;
+  background:#151522;
+}
+
+.category-icon{
+  font-size:37px;
+  margin-bottom:13px;
+}
+
+.category h3{
+  font-family:Orbitron;
+  font-size:14px;
+}
+
+.category p{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:6px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.product-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  margin-bottom:28px;
+}
+
+.filter{
+  background:#11111a;
+  color:#ddd;
+  border:1px solid var(--border);
+  padding:10px 14px;
+  border-radius:8px;
+  outline:none;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.product{
+  background:linear-gradient(145deg,var(--card),#0d0d15);
+  border:1px solid var(--border);
+  border-radius:15px;
+  overflow:hidden;
+  transition:.25s;
+  position:relative;
+}
+
+.product:hover{
+  transform:translateY(-6px);
+  border-color:#8b5cf655;
+  box-shadow:0 15px 50px #0008;
+}
+
+.product-image{
+  height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  background:
+    radial-gradient(circle,#252040,transparent 65%),
+    #0d0d15;
+}
+
+.discount{
+  position:absolute;
+  left:12px;
+  top:12px;
+  background:#ef4444;
+  color:white;
+  padding:5px 8px;
+  border-radius:5px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.product-icon{
+  font-size:90px;
+  filter:drop-shadow(0 15px 20px #000);
+  transition:.3s;
+}
+
+.product:hover .product-icon{
+  transform:scale(1.08) rotate(-3deg);
+}
+
+.product-info{
+  padding:17px;
+}
+
+.product-category{
+  color:#a78bfa;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-weight:800;
+}
+
+.product-name{
+  font-size:14px;
+  margin:7px 0;
+}
+
+.rating{
+  color:#facc15;
+  font-size:11px;
+}
+
+.rating span{
+  color:var(--muted);
+  margin-left:5px;
+}
+
+.price-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:13px;
+}
+
+.price{
+  font-family:Orbitron;
+  font-size:16px;
+  font-weight:800;
+}
+
+.old-price{
+  color:#66677a;
+  text-decoration:line-through;
+  font-family:Inter;
+  font-size:11px;
+  margin-left:5px;
+}
+
+.add{
+  border:0;
+  width:35px;
+  height:35px;
+  border-radius:8px;
+  background:#8b5cf622;
+  color:#c4b5fd;
+  font-size:20px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.add:hover{
+  background:var(--purple);
+  color:white;
+}
+
+/* ================= DEAL BANNER ================= */
+
+.deal{
+  border-radius:20px;
+  border:1px solid #8b5cf633;
+  padding:45px;
+  background:
+    radial-gradient(circle at 75% 50%,#ec489933,transparent 25%),
+    radial-gradient(circle at 25% 50%,#8b5cf633,transparent 30%),
+    #11101a;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  overflow:hidden;
+}
+
+.deal h2{
+  font-family:Orbitron;
+  font-size:31px;
+}
+
+.deal p{
+  color:var(--muted);
+  margin:10px 0 20px;
+  font-size:13px;
+}
+
+.deal-price{
+  font-family:Orbitron;
+  font-size:48px;
+  color:#c4b5fd;
+}
+
+/* ================= FEATURES ================= */
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.feature{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:25px;
+  border-radius:15px;
+}
+
+.feature-icon{
+  font-size:27px;
+  margin-bottom:15px;
+}
+
+.feature h3{
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.feature p{
+  color:var(--muted);
+  line-height:1.6;
+  font-size:12px;
+}
+
+/* ================= CART ================= */
+
+.cart-overlay{
+  position:fixed;
+  inset:0;
+  background:#0009;
+  z-index:2000;
+  display:none;
+}
+
+.cart-overlay.active{
+  display:block;
+}
+
+.cart{
+  position:absolute;
+  right:0;
+  top:0;
+  height:100%;
+  width:min(420px,100%);
+  background:#0d0d15;
+  border-left:1px solid var(--border);
+  padding:25px;
+  overflow:auto;
+}
+
+.cart-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.cart-head h2{
+  font-family:Orbitron;
+  font-size:20px;
+}
+
+.close{
+  background:none;
+  color:white;
+  border:0;
+  font-size:25px;
+  cursor:pointer;
+}
+
+.cart-item{
+  display:flex;
+  gap:12px;
+  padding:15px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.cart-item-icon{
+  width:55px;
+  height:55px;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  background:#171724;
+  font-size:27px;
+}
+
+.cart-item-info{
+  flex:1;
+}
+
+.cart-item-info strong{
+  display:block;
+  font-size:12px;
+}
+
+.cart-item-info small{
+  color:var(--muted);
+}
+
+.remove{
+  border:0;
+  background:none;
+  color:#ef4444;
+  cursor:pointer;
+}
+
+.cart-total{
+  display:flex;
+  justify-content:space-between;
+  margin:25px 0;
+  font-family:Orbitron;
+}
+
+.checkout{
+  width:100%;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  border-top:1px solid var(--border);
+  padding:30px 0;
+  color:#66677a;
+  font-size:11px;
+}
+
+.footer-inner{
+  display:flex;
+  justify-content:space-between;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:950px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .search{
+    display:none;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding-top:120px;
+  }
+
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .features{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .hero-product{
+    height:350px;
+  }
+
+  .categories{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .products{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .product-image{
+    height:170px;
+  }
+
+  .product-icon{
+    font-size:65px;
+  }
+
+  .product-info{
+    padding:12px;
+  }
+
+  .product-name{
+    font-size:12px;
+  }
+
+  .price{
+    font-size:13px;
+  }
+
+  .deal{
+    padding:30px 20px;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .deal-price{
+    font-size:38px;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+    gap:10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+<div class="container nav-inner">
+
+  <a class="logo" href="#">VORTEX<span>.</span></a>
+
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#deals">Deals</a></li>
+    <li><a href="#features">Why Us</a></li>
+  </ul>
+
+  <div class="search">
+    <span class="search-icon">⌕</span>
+    <input id="searchInput" type="text" placeholder="Search gear...">
+  </div>
+
+  <button class="cart-btn" onclick="openCart()">
+    🛒 CART
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+
+  <div class="menu">☰</div>
+
+</div>
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="container hero-grid">
+
+  <div>
+
+    <div class="badge">⚡ THE ULTIMATE GAMING STORE</div>
+
+    <h1>
+      GEAR UP.<br>
+      <span class="gradient">GAME ON.</span>
+    </h1>
+
+    <p>
+      Premium gaming gear built for players who refuse to settle.
+      Discover esports-grade keyboards, mice, headsets, chairs and
+      everything you need to dominate the competition.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#shop" class="btn btn-primary">SHOP NOW →</a>
+      <a href="#categories" class="btn btn-dark">EXPLORE GEAR</a>
+    </div>
+
+  </div>
+
+  <div class="hero-product">
+
+    <div class="headset"></div>
+
+    <div class="hero-product-label">
+      <small>FEATURED PRODUCT</small>
+      <strong>VORTEX X PRO HEADSET</strong>
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section id="categories">
+
+<div class="container">
+
+  <h2 class="section-title">SHOP BY CATEGORY</h2>
+  <p class="section-subtitle">Everything you need for your ultimate setup.</p>
+
+  <div class="categories">
+
+    <div class="category" onclick="filterProducts('Keyboard')">
+      <div class="category-icon">⌨️</div>
+      <h3>KEYBOARDS</h3>
+      <p>Mechanical & RGB</p>
+    </div>
+
+    <div class="category" onclick="filterProducts('Mouse')">
+      <div class="category-icon">🖱️</div>
+      <h3>MICE</h3>
+      <p>Ultra-light precision</p>
+    </div>
+
+    <div class="category" onclick="filterProducts('Headset')">
+      <div class="category-icon">🎧</div>
+      <h3>HEADSETS</h3>
+      <p>Immersive audio</p>
+    </div>
+
+    <div class="category" onclick="filterProducts('Chair')">
+      <div class="category-icon">🪑</div>
+      <h3>GAMING CHAIRS</h3>
+      <p>Play in comfort</p>
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section id="shop">
+
+<div class="container">
+
+  <div class="product-header">
+
+    <div>
+      <h2 class="section-title">TRENDING GEAR</h2>
+      <p class="section-subtitle">Esports equipment chosen by champions.</p>
+    </div>
+
+    <select class="filter" id="categoryFilter" onchange="filterProducts(this.value)">
+      <option value="All">All Products</option>
+      <option value="Keyboard">Keyboards</option>
+      <option value="Mouse">Mice</option>
+      <option value="Headset">Headsets</option>
+      <option value="Chair">Chairs</option>
+    </select>
+
+  </div>
+
+  <div class="products" id="products"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= DEAL ================= -->
+
+<section id="deals">
+
+<div class="container">
+
+  <div class="deal">
+
+    <div>
+      <div class="badge">🔥 LIMITED TIME OFFER</div>
+      <h2>LEVEL UP YOUR SETUP</h2>
+      <p>Get the complete esports starter bundle at an insane price.</p>
+      <a href="#shop" class="btn btn-primary">GET THE BUNDLE →</a>
+    </div>
+
+    <div class="deal-price">
+      $149
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section id="features">
+
+<div class="container">
+
+  <h2 class="section-title">WHY VORTEX?</h2>
+  <p class="section-subtitle">Built for gamers. Designed for victory.</p>
+
+  <div class="features">
+
+    <div class="feature">
+      <div class="feature-icon">🚀</div>
+      <h3>FAST SHIPPING</h3>
+      <p>
+        Lightning-fast delivery so your new gear reaches your setup
+        as quickly as possible.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🛡️</div>
+      <h3>2 YEAR WARRANTY</h3>
+      <p>
+        Every Vortex product comes with reliable protection and
+        dedicated support.
+      </p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <h3>ESPORTS TESTED</h3>
+      <p>
+        Our gear is designed around the demands of competitive
+        gamers and esports professionals.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="container footer-inner">
+  <div>© 2026 VORTEX GAMING. ALL RIGHTS RESERVED.</div>
+  <div>PLAY • COMPETE • CONQUER</div>
+</div>
+
+</footer>
+
+
+<!-- ================= CART ================= -->
+
+<div class="cart-overlay" id="cartOverlay">
+
+  <div class="cart">
+
+    <div class="cart-head">
+      <h2>YOUR CART</h2>
+      <button class="close" onclick="closeCart()">×</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+      <span>TOTAL</span>
+      <span id="cartTotal">$0.00</span>
+    </div>
+
+    <button class="btn btn-primary checkout" onclick="checkout()">
+      PROCEED TO CHECKOUT →
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ================= PRODUCT DATA ================= */
+
+const products = [
+
+  {
+    id:1,
+    name:"Vortex Phantom Keyboard",
+    category:"Keyboard",
+    price:89,
+    old:119,
+    rating:"4.9",
+    icon:"⌨️",
+    discount:"25% OFF"
+  },
+
+  {
+    id:2,
+    name:"Vortex X1 Wireless Mouse",
+    category:"Mouse",
+    price:59,
+    old:79,
+    rating:"4.8",
+    icon:"🖱️",
+    discount:"25% OFF"
+  },
+
+  {
+    id:3,
+    name:"Vortex X Pro Headset",
+    category:"Headset",
+    price:99,
+    old:139,
+    rating:"4.9",
+    icon:"🎧",
+    discount:"29% OFF"
+  },
+
+  {
+    id:4,
+    name:"Vortex Titan Gaming Chair",
+    category:"Chair",
+    price:199,
+    old:249,
+    rating:"4.7",
+    icon:"🪑",
+    discount:"20% OFF"
+  },
+
+  {
+    id:5,
+    name:"Neon RGB Mechanical Keyboard",
+    category:"Keyboard",
+    price:109,
+    old:129,
+    rating:"4.8",
+    icon:"⌨️",
+    discount:"15% OFF"
+  },
+
+  {
+    id:6,
+    name:"Phantom Ultra-Light Mouse",
+    category:"Mouse",
+    price:69,
+    old:89,
+    rating:"4.9",
+    icon:"🖱️",
+    discount:"22% OFF"
+  },
+
+  {
+    id:7,
+    name:"Pulse 7.1 Gaming Headset",
+    category:"Headset",
+    price:79,
+    old:99,
+    rating:"4.6",
+    icon:"🎧",
+    discount:"20% OFF"
+  },
+
+  {
+    id:8,
+    name:"Vortex Pro Racer Chair",
+    category:"Chair",
+    price:229,
+    old:299,
+    rating:"4.8",
+    icon:"🪑",
+    discount:"23% OFF"
+  }
+
+];
+
+let cart = [];
+
+
+/* ================= DISPLAY PRODUCTS ================= */
+
+function displayProducts(list = products){
+
+  const container = document.getElementById("products");
+
+  container.innerHTML = "";
+
+  if(list.length === 0){
+
+    container.innerHTML = `
+      <p style="color:#888;grid-column:1/-1;padding:40px 0;">
+        No products found.
+      </p>
+    `;
+
+    return;
+  }
+
+  list.forEach(product=>{
+
+    container.innerHTML += `
+
+      <div class="product">
+
+        <div class="product-image">
+
+          <span class="discount">${product.discount}</span>
+
+          <div class="product-icon">
+            ${product.icon}
+          </div>
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            ${product.category}
+          </div>
+
+          <div class="product-name">
+            ${product.name}
+          </div>
+
+          <div class="rating">
+            ★★★★★
+            <span>${product.rating}</span>
+          </div>
+
+          <div class="price-row">
+
+            <div class="price">
+              $${product.price}
+              <span class="old-price">
+                $${product.old}
+              </span>
+            </div>
+
+            <button class="add" onclick="addToCart(${product.id})">
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+/* ================= FILTER ================= */
+
+function filterProducts(category){
+
+  document.getElementById("categoryFilter").value = category;
+
+  if(category === "All"){
+    displayProducts(products);
+    return;
+  }
+
+  displayProducts(
+    products.filter(product =>
+      product.category === category
+    )
+  );
+
+  document.getElementById("shop").scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+
+/* ================= SEARCH ================= */
+
+document.getElementById("searchInput").addEventListener("input",function(){
+
+  const search = this.value.toLowerCase();
+
+  const filtered = products.filter(product =>
+    product.name.toLowerCase().includes(search) ||
+    product.category.toLowerCase().includes(search)
+  );
+
+  displayProducts(filtered);
+
+});
+
+
+/* ================= CART ================= */
+
+function addToCart(id){
+
+  const product = products.find(p => p.id === id);
+
+  const existing = cart.find(item => item.id === id);
+
+  if(existing){
+    existing.qty++;
+  }else{
+    cart.push({
+      ...product,
+      qty:1
+    });
+  }
+
+  updateCart();
+
+  openCart();
+
+}
+
+
+function removeFromCart(id){
+
+  cart = cart.filter(item => item.id !== id);
+
+  updateCart();
+
+}
+
+
+function updateCart(){
+
+  const cartItems = document.getElementById("cartItems");
+
+  const cartCount = document.getElementById("cartCount");
+
+  const cartTotal = document.getElementById("cartTotal");
+
+  cartItems.innerHTML = "";
+
+  let total = 0;
+  let count = 0;
+
+  cart.forEach(item=>{
+
+    total += item.price * item.qty;
+    count += item.qty;
+
+    cartItems.innerHTML += `
+
+      <div class="cart-item">
+
+        <div class="cart-item-icon">
+          ${item.icon}
+        </div>
+
+        <div class="cart-item-info">
+
+          <strong>${item.name}</strong>
+
+          <small>
+            $${item.price} × ${item.qty}
+          </small>
+
+        </div>
+
+        <button class="remove"
+          onclick="removeFromCart(${item.id})">
+          Remove
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+  if(cart.length === 0){
+
+    cartItems.innerHTML = `
+      <p style="color:#777;text-align:center;padding:50px 0;">
+        Your cart is empty.
+      </p>
+    `;
+
+  }
+
+  cartCount.textContent = count;
+
+  cartTotal.textContent = "$" + total.toFixed(2);
+
+}
+
+
+/* ================= CART OPEN/CLOSE ================= */
+
+function openCart(){
+
+  document.getElementById("cartOverlay")
+    .classList.add("active");
+
+}
+
+function closeCart(){
+
+  document.getElementById("cartOverlay")
+    .classList.remove("active");
+
+}
+
+
+/* ================= CHECKOUT ================= */
+
+function checkout(){
+
+  if(cart.length === 0){
+
+    alert("Your cart is empty!");
+
+    return;
+
+  }
+
+  alert(
+    "Thanks for shopping with VORTEX! 🚀\n\n" +
+    "Checkout integration can be connected here."
+  );
+
+}
+
+
+/* ================= INITIAL LOAD ================= */
+
+displayProducts();
+
+updateCart();
+
+
+/* ================= CLOSE CART OUTSIDE ================= */
+
+document.getElementById("cartOverlay").addEventListener("click",function(e){
+
+  if(e.target === this){
+    closeCart();
+  }
+
+});
+
+</script>
+
+</body>
+</html>

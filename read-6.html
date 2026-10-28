@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Read 6 | CODMIL</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #030303;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.8;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(100% - 40px, 1000px);
+  margin: auto;
+}
+
+header {
+  border-bottom: 1px solid #25282e;
+}
+
+nav {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #00d5ff;
+}
+
+.back {
+  color: #9aa9c5;
+  font-size: 12px;
+}
+
+.hero {
+  padding: 100px 0 65px;
+  border-bottom: 1px solid #25282e;
+}
+
+.label {
+  color: #00d5ff;
+  font-size: 10px;
+  letter-spacing: 3px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.number {
+  color: #697184;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: clamp(40px, 7vw, 75px);
+  line-height: 1.1;
+  letter-spacing: -3px;
+  margin-bottom: 25px;
+}
+
+h1 span,
+h2 span {
+  color: #00d5ff;
+}
+
+.intro {
+  max-width: 650px;
+  color: #9aa9c5;
+  font-size: 16px;
+}
+
+.meta {
+  color: #768198;
+  font-size: 11px;
+  margin-top: 25px;
+}
+
+main {
+  padding: 70px 0;
+}
+
+.article {
+  max-width: 750px;
+  margin: auto;
+}
+
+section {
+  margin-bottom: 55px;
+  scroll-margin-top: 20px;
+}
+
+h2 {
+  font-size: clamp(26px, 4vw, 35px);
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #9aa9c5;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.quote {
+  padding: 28px;
+  margin: 30px 0;
+  background: #0c0f14;
+  border: 1px solid #25282e;
+  border-left: 3px solid #00d5ff;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 19px;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.card {
+  padding: 24px;
+  background: #0c0f14;
+  border: 1px solid #25282e;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  border-color: #00d5ff;
+  transform: translateY(-4px);
+}
+
+.card small {
+  color: #0066ff;
+  letter-spacing: 2px;
+}
+
+.card h3 {
+  margin: 12px 0;
+  font-size: 17px;
+}
+
+.card p {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+.checklist {
+  list-style: none;
+}
+
+.checklist li {
+  background: #0c0f14;
+  border: 1px solid #25282e;
+  border-radius: 8px;
+  padding: 13px 16px;
+  margin: 10px 0;
+  color: #9aa9c5;
+  font-size: 13px;
+}
+
+.checklist li::before {
+  content: "✓";
+  color: #00d5ff;
+  margin-right: 12px;
+}
+
+.conclusion {
+  padding: 30px;
+  border: 1px solid #25282e;
+  border-radius: 12px;
+  background: radial-gradient(
+    ellipse at top right,
+    rgba(0, 213, 255, 0.08),
+    transparent 65%
+  ), #0c0f14;
+}
+
+.article-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  border-top: 1px solid #25282e;
+  margin-top: 35px;
+  padding-top: 25px;
+}
+
+.article-nav a {
+  color: #00d5ff;
+  font-size: 12px;
+}
+
+footer {
+  padding: 30px 0;
+  border-top: 1px solid #25282e;
+  color: #697184;
+  font-size: 11px;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 65px 0 45px;
+  }
+
+  h1 {
+    letter-spacing: -2px;
+  }
+
+  main {
+    padding: 45px 0;
+  }
+
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .conclusion {
+    padding: 22px;
+  }
+
+  .footer-inner {
+    flex-wrap: wrap;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <nav class="container">
+    <a href="index.html" class="logo">CODMIL<span>.</span></a>
+    <a href="index.html" class="back">← BACK TO ARTICLES</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="container">
+    <p class="label">STRATEGY / INNOVATION</p>
+    <p class="number">ARTICLE 06</p>
+
+    <h1>
+      Turning bold ideas<br>
+      <span>into reality.</span>
+    </h1>
+
+    <p class="intro">
+      Every meaningful product begins with an idea.
+      Turning that idea into reality takes creativity,
+      thoughtful planning, and consistent action.
+    </p>
+
+    <div class="meta">
+      Strategy Insights · 7 min read · CODMIL Journal
+    </div>
+  </div>
+</div>
+
+<main class="container">
+<article class="article">
+
+  <section id="introduction">
+    <h2>Big things start with <span>an idea.</span></h2>
+
+    <p>
+      Every website, application, service, and digital product
+      begins somewhere. Sometimes it starts with a problem that
+      needs solving. Other times, it begins with a new perspective
+      or a better way of doing something.
+    </p>
+
+    <p>
+      Having a great idea is only the beginning. The real
+      challenge is turning an abstract thought into something
+      useful that people can experience.
+    </p>
+
+    <div class="quote">
+      An idea creates possibility. Action turns that
+      possibility into something real.
+    </div>
+
+    <p>
+      Successful projects combine creative thinking with
+      practical decisions. They start with a clear purpose,
+      test assumptions early, and improve as new information
+      becomes available.
+    </p>
+  </section>
+
+  <section id="problem">
+    <h2>Start with the <span>right problem.</span></h2>
+
+    <p>
+      Before building a product, ask why it needs to exist.
+      What problem does it solve? Who experiences that problem?
+      How are people dealing with it today?
+    </p>
+
+    <p>
+      Understanding the problem helps separate useful
+      opportunities from ideas that sound exciting but
+      offer little real value.
+    </p>
+
+    <p>
+      <strong>Focus on people, not assumptions.</strong>
+      Talk to potential users, observe their challenges,
+      and research existing solutions. Their feedback may
+      help you improve your original idea.
+    </p>
+  </section>
+
+  <section id="planning">
+    <h2>Turn your vision into <span>a plan.</span></h2>
+
+    <p>
+      A clear vision provides direction, but a practical
+      plan explains how to move forward. Define the main
+      objective, identify the people involved, and decide
+      what success should look like.
+    </p>
+
+    <p>
+      Break a large project into smaller, manageable tasks.
+      Prioritize the features that solve the most important
+      problem instead of trying to build everything at once.
+    </p>
+
+    <p>
+      Planning provides structure while leaving room to adapt
+      when new information reveals a better approach.
+    </p>
+  </section>
+
+  <section id="process">
+    <h2>From idea to <span>reality.</span></h2>
+
+    <p>
+      Every project is different, but these six steps can
+      help transform an initial concept into a working product.
+    </p>
+
+    <div class="process-grid">
+
+      <div class="card">
+        <small>01 / DISCOVER</small>
+        <h3>Understand</h3>
+        <p>
+          Research your audience, identify the problem,
+          and define the value your idea provides.
+        </p>
+      </div>
+
+      <div class="card">
+        <small>02 / DEFINE</small>
+        <h3>Set a direction</h3>
+        <p>
+          Establish clear goals and decide what matters
+          most for the first version.
+        </p>
+      </div>
+
+      <div class="card">
+        <small>03 / CREATE</small>
+        <h3>Build a prototype</h3>
+        <p>
+          Develop a simple version so that important
+          assumptions can be tested early.
+        </p>
+      </div>
+
+      <div class="card">
+        <small>04 / VALIDATE</small>
+        <h3>Learn and improve</h3>
+        <p>
+          Gather feedback, identify problems, and refine
+          the experience.
+        </p>
+      </div>
+
+      <div class="card">
+        <small>05 / LAUNCH</small>
+        <h3>Deliver value</h3>
+        <p>
+          Release the product and help your intended
+          audience discover it.
+        </p>
+      </div>
+
+      <div class="card">
+        <small>06 / GROW</small>
+        <h3>Keep evolving</h3>
+        <p>
+          Monitor results, listen to users, and improve
+          the product over time.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="challenges">
+    <h2>Progress through <span>challenges.</span></h2>
+
+    <p>
+      Every meaningful project faces obstacles. Budgets may
+      change, technical problems may appear, and early feedback
+      may challenge the original vision.
+    </p>
+
+    <p>
+      These challenges can reveal what needs to change, where
+      resources should be focused, or which assumptions were
+      incorrect.
+    </p>
+
+    <p>
+      Keep the overall goal in mind while staying flexible
+      about the path. Focus on what you can learn and what
+      practical step you can take next.
+    </p>
+
+    <p>
+      Consistent progress is often more valuable than waiting
+      for perfect conditions.
+    </p>
+  </section>
+
+  <section id="checklist">
+    <h2>Your idea, your <span>next step.</span></h2>
+
+    <p>
+      Use this checklist to turn your thoughts into action.
+    </p>
+
+    <ul class="checklist">
+      <li>Write down the problem your idea solves.</li>
+      <li>Identify the people who will benefit from it.</li>
+      <li>Research existing products and alternatives.</li>
+      <li>Choose the most important first feature.</li>
+      <li>Create a simple prototype or initial version.</li>
+      <li>Collect feedback and improve the result.</li>
+      <li>Set a realistic milestone and take action.</li>
+    </ul>
+  </section>
+
+  <section id="conclusion" class="conclusion">
+    <h2>Make ideas happen.</h2>
+
+    <p>
+      Turning bold ideas into reality is not about predicting
+      every outcome or getting everything right on the first
+      attempt. It is about understanding a problem, making
+      thoughtful decisions, and learning through action.
+    </p>
+
+    <p>
+      Start small, stay focused on the people you want to help,
+      and keep improving as you go. With purpose, persistence,
+      and a clear direction, an idea can become something
+      genuinely valuable.
+    </p>
+  </section>
+
+  <div class="article-nav">
+    <div>
+      <p>BACK TO THE COLLECTION</p>
+      <strong>Explore more from CODMIL.</strong>
+    </div>
+
+    <a href="index.html">ALL ARTICLES →</a>
+  </div>
+
+</article>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© CODMIL. All rights reserved.</span>
+    <a href="index.html">Back to home ↑</a>
+  </div>
+</footer>
+
+</body>
+</html>

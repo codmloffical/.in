@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read 5 | Code That Works Smarter — CODMIL</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #030303;
+      --card: #0c0f14;
+      --border: #25282e;
+      --white: #ffffff;
+      --muted: #9aa9c5;
+      --cyan: #00d5ff;
+      --blue: #0066ff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 48px, 1000px);
+      margin: auto;
+    }
+
+    header {
+      border-bottom: 1px solid #181818;
+    }
+
+    nav {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--cyan);
+    }
+
+    .back-link {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .back-link:hover,
+    .sidebar a:hover {
+      color: var(--cyan);
+    }
+
+    .article-hero {
+      padding: 100px 0 65px;
+      border-bottom: 1px solid #181818;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin-bottom: 25px;
+    }
+
+    .article-number {
+      color: #626c80;
+      font-family: monospace;
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      max-width: 850px;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.04;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+    }
+
+    h1 span,
+    .article-body h2 span {
+      color: var(--cyan);
+    }
+
+    .hero-description {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+      color: #768198;
+      font-size: 11px;
+    }
+
+    .article-meta span::before {
+      content: "•";
+      color: var(--cyan);
+      margin-right: 8px;
+    }
+
+    .article-layout {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 65px;
+      padding: 75px 0;
+    }
+
+    .sidebar {
+      align-self: start;
+      position: sticky;
+      top: 30px;
+      border-left: 1px solid var(--border);
+      padding-left: 20px;
+    }
+
+    .sidebar p {
+      color: #68758d;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 12px 0;
+    }
+
+    .article-body section {
+      margin-bottom: 55px;
+      scroll-margin-top: 30px;
+    }
+
+    .article-body h2 {
+      font-size: clamp(25px, 4vw, 34px);
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 22px;
+    }
+
+    .article-body p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 2;
+      margin-bottom: 18px;
+    }
+
+    .article-body strong {
+      color: var(--white);
+    }
+
+    .quote {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--cyan);
+      border-radius: 8px;
+      padding: 28px;
+      margin: 30px 0;
+      color: #e9f2ff;
+      font-size: 19px;
+      line-height: 1.7;
+    }
+
+    .code-card {
+      margin: 28px 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #080a0e;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 13px 17px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #454b59;
+    }
+
+    .code-header span:last-child {
+      margin-left: 7px;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 22px;
+      color: #b8d9ff;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .code-comment {
+      color: #6d7c91;
+    }
+
+    .code-keyword {
+      color: var(--cyan);
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 25px;
+    }
+
+    .principle-card {
+      padding: 23px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .principle-card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-3px);
+    }
+
+    .principle-card .number {
+      color: var(--blue);
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    .principle-card h3 {
+      font-size: 16px;
+      margin: 15px 0 8px;
+    }
+
+    .principle-card p {
+      font-size: 12px;
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    .conclusion {
+      padding: 35px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background:
+        radial-gradient(
+          ellipse at top right,
+          rgba(0, 213, 255, 0.08),
+          transparent 65%
+        ),
+        var(--card);
+    }
+
+    .conclusion h2 {
+      font-size: 30px;
+      margin-bottom: 15px;
+    }
+
+    .conclusion p {
+      margin-bottom: 0;
+    }
+
+    .article-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-top: 35px;
+      padding: 25px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .article-navigation small {
+      display: block;
+      color: #75829b;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+    }
+
+    .article-navigation strong {
+      font-size: 15px;
+    }
+
+    .article-navigation a {
+      color: var(--cyan);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    footer {
+      border-top: 1px solid #181818;
+      padding: 30px 0;
+      color: #68758d;
+      font-size: 11px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(100% - 36px, 1000px);
+      }
+
+      .article-hero {
+        padding: 70px 0 45px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .article-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 45px 0;
+      }
+
+      .sidebar {
+        position: static;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 18px;
+        padding: 0 0 20px;
+        border-left: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .sidebar p {
+        width: 100%;
+        margin-bottom: 0;
+      }
+
+      .sidebar a {
+        margin: 4px 0;
+      }
+
+      .principles {
+        grid-template-columns: 1fr;
+      }
+
+      .conclusion {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="container">
+      <a href="index.html" class="logo">CODMIL<span>.</span></a>
+      <a href="index.html" class="back-link">← BACK TO ARTICLES</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="article-hero">
+      <div class="container">
+        <p class="eyebrow">DEVELOPMENT / WEB TECHNOLOGY</p>
+        <p class="article-number">ARTICLE 05</p>
+
+        <h1>
+          Code that works<br>
+          <span>smarter.</span>
+        </h1>
+
+        <p class="hero-description">
+          Building a website is not just about making it work.
+          It is about creating reliable, maintainable, and fast
+          digital experiences that can grow with your ideas.
+        </p>
+
+        <div class="article-meta">
+          <span>Development Insights</span>
+          <span>7 min read</span>
+          <span>CODMIL Journal</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container article-layout">
+
+      <aside class="sidebar">
+        <p>IN THIS ARTICLE</p>
+        <a href="#introduction">Introduction</a>
+        <a href="#clean-code">Clean code</a>
+        <a href="#performance">Performance</a>
+        <a href="#principles">Core principles</a>
+        <a href="#scalability">Building to scale</a>
+        <a href="#conclusion">Final thoughts</a>
+      </aside>
+
+      <article class="article-body">
+
+        <section id="introduction">
+          <h2>Good code starts with <span>good thinking.</span></h2>
+
+          <p>
+            A website may look impressive on the surface, but the
+            quality of its development becomes clear over time.
+            Pages need to load quickly, features need to behave
+            consistently, and updates should not break existing work.
+          </p>
+
+          <p>
+            Strong development is about more than writing code
+            quickly. It means making deliberate decisions that
+            keep a project understandable, dependable, and easy
+            to improve.
+          </p>
+
+          <div class="quote">
+            Write code for the person who will maintain it
+            tomorrow, not just for the browser that runs it today.
+          </div>
+
+          <p>
+            At CODMIL, thoughtful development means balancing
+            functionality, performance, maintainability, and the
+            needs of the people using the final product.
+          </p>
+        </section>
+
+        <section id="clean-code">
+          <h2>Keep your code <span>clean.</span></h2>
+
+          <p>
+            Clean code is easier to read, understand, test, and
+            change. Meaningful names, consistent formatting, and
+            small, focused functions make a codebase easier for
+            everyone on a team to work with.
+          </p>
+
+          <p>
+            Avoid repeating the same logic in many places.
+            When a shared component or function can handle a
+            repeated task, updates become easier and inconsistencies
+            become less likely.
+          </p>
+
+          <p>
+            <strong>Clarity beats cleverness.</strong>
+            A straightforward solution is often better than a
+            complicated one that only its original author understands.
+          </p>
+
+          <div class="code-card">
+            <div class="code-header">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span>example.js</span>
+            </div>
+
+            <pre><span class="code-comment">// A small, reusable function</span>
+<span class="code-keyword">function</span> greetUser(name) {
+  <span class="code-keyword">return</span> `Welcome, ${name}!`;
+}
+
+<span class="code-comment">// Reuse it wherever needed</span>
+console.log(greetUser("CODMIL"));</pre>
+          </div>
+
+          <p>
+            This simple example demonstrates a useful habit:
+            give functions one clear purpose and names that explain
+            what they do.
+          </p>
+        </section>
+
+        <section id="performance">
+          <h2>Make speed a <span>priority.</span></h2>
+
+          <p>
+            Performance affects how people experience a website.
+            Slow pages can interrupt a task, make interactions
+            feel unreliable, and discourage visitors from continuing.
+          </p>
+
+          <p>
+            Start by optimizing images, removing unnecessary
+            JavaScript, limiting unused dependencies, and avoiding
+            expensive operations that block the main thread.
+          </p>
+
+          <p>
+            Measure performance instead of guessing. Browser
+            developer tools and real-user performance data can
+            reveal which improvements will make the biggest difference.
+          </p>
+
+          <p>
+            A fast website does not have to be visually simple.
+            It needs to deliver its design efficiently, with
+            sensible loading strategies and carefully chosen assets.
+          </p>
+        </section>
+
+        <section id="principles">
+          <h2>Four principles of <span>smarter development.</span></h2>
+
+          <div class="principles">
+
+            <div class="principle-card">
+              <span class="number">01</span>
+              <h3>Maintainability</h3>
+              <p>
+                Organize code so that future changes are
+                straightforward and predictable.
+              </p>
+            </div>
+
+            <div class="principle-card">
+              <span class="number">02</span>
+              <h3>Performance</h3>
+              <p>
+                Reduce unnecessary work and help pages load
+                and respond quickly.
+              </p>
+            </div>
+
+            <div class="principle-card">
+              <span class="number">03</span>
+              <h3>Reliability</h3>
+              <p>
+                Validate inputs, handle errors, and test important
+                user journeys before release.
+              </p>
+            </div>
+
+            <div class="principle-card">
+              <span class="number">04</span>
+              <h3>Accessibility</h3>
+              <p>
+                Build semantic interfaces that work for keyboard
+                users and assistive technologies.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <section id="scalability">
+          <h2>Build for <span>growth.</span></h2>
+
+          <p>
+            A project that starts with a few pages can grow into
+            a complex product. New features, additional users,
+            and changing business requirements can quickly make
+            an unstructured codebase difficult to manage.
+          </p>
+
+          <p>
+            Use reusable components where they provide real value.
+            Keep responsibilities separated, document important
+            decisions, and choose tools that suit the actual
+            requirements of the project.
+          </p>
+
+          <p>
+            Scalability is not about making every small project
+            unnecessarily complex. It is about leaving room for
+            change without making today's work harder than it
+            needs to be.
+          </p>
+        </section>
+
+        <section>
+          <h2>Test, learn, <span>improve.</span></h2>
+
+          <p>
+            No matter how carefully code is written, mistakes can
+            happen. Testing helps identify problems before they
+            reach users.
+          </p>
+
+          <p>
+            Test essential interactions, check layouts at different
+            screen sizes, inspect accessibility, and verify that
+            error states are handled properly.
+          </p>
+
+          <p>
+            Code reviews provide another opportunity to catch
+            problems, share knowledge, and keep implementation
+            quality consistent across a team.
+          </p>
+        </section>
+
+        <section id="conclusion" class="conclusion">
+          <h2>Build better. Build smarter.</h2>
+
+          <p>
+            Great development is not measured only by the amount
+            of code written or the number of features shipped.
+            It is measured by how well a product works, how easily
+            it can evolve, and how reliably it serves its users.
+          </p>
+
+          <p>
+            Keep solutions clear, measure what matters, and
+            improve continuously. Those habits create a stronger
+            foundation for every digital product.
+          </p>
+        </section>
+
+        <div class="article-navigation">
+          <div>
+            <small>CONTINUE EXPLORING</small>
+            <strong>Turning bold ideas into reality.</strong>
+          </div>
+
+          <a href="read-6.html">READ 6 →</a>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© CODMIL. All rights reserved.</span>
+      <a href="index.html">Back to home ↑</a>
+    </div>
+  </footer>
+
+</body>
+</html>
